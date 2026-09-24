@@ -1,0 +1,179 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Profil pengguna (peserta magang, mentor, atau guru/dosen)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "enum": ["student", "mentor", "teacher"] },
+        "avatar": { "type": "string", "maxLength": 500 },
+        "institution": { "type": "string", "maxLength": 200 },
+        "major": { "type": "string", "maxLength": 150 },
+        "studentId": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "companyName": { "type": "string", "maxLength": 200 },
+        "internshipRole": { "type": "string", "maxLength": 150 },
+        "startDate": { "type": "string", "maxLength": 50 },
+        "endDate": { "type": "string", "maxLength": 50 },
+        "totalHoursTarget": { "type": "number" },
+        "mentorName": { "type": "string", "maxLength": 150 },
+        "teacherName": { "type": "string", "maxLength": 150 }
+      },
+      "required": ["id", "name", "role", "email"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Catatan presensi harian peserta magang",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 20 },
+        "checkInTime": { "type": "string", "maxLength": 20 },
+        "checkOutTime": { "type": "string", "maxLength": 20 },
+        "type": { "type": "string", "enum": ["WFO", "WFH", "Izin", "Sakit"] },
+        "status": { "type": "string", "enum": ["present", "late", "excused", "absent"] },
+        "location": { "type": "string", "maxLength": 300 },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "photoUrl": { "type": "string", "maxLength": 500 },
+        "notes": { "type": "string", "maxLength": 500 },
+        "verifiedByMentor": { "type": "boolean" }
+      },
+      "required": ["id", "studentId", "date", "checkInTime", "type", "status", "location"]
+    },
+    "LogbookEntry": {
+      "title": "LogbookEntry",
+      "description": "Dokumentasi jurnal kegiatan harian magang",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 20 },
+        "title": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "maxLength": 100 },
+        "startTime": { "type": "string", "maxLength": 20 },
+        "endTime": { "type": "string", "maxLength": 20 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "obstacles": { "type": "string", "maxLength": 1000 },
+        "solution": { "type": "string", "maxLength": 1000 },
+        "outputUrl": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["draft", "pending", "approved", "revision_requested"] },
+        "mentorFeedback": { "type": "string", "maxLength": 1000 },
+        "reviewedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "studentId", "date", "title", "category", "startTime", "endTime", "description", "status"]
+    },
+    "InternshipTask": {
+      "title": "InternshipTask",
+      "description": "Tugas atau milestone proyek magang",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "assignedTo": { "type": "string", "maxLength": 128 },
+        "assignedBy": { "type": "string", "maxLength": 150 },
+        "deadline": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "enum": ["todo", "in_progress", "review", "done"] },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "submissionNotes": { "type": "string", "maxLength": 2000 },
+        "submissionLink": { "type": "string", "maxLength": 500 },
+        "mentorScore": { "type": "number" },
+        "mentorComment": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "title", "description", "assignedTo", "deadline", "status", "priority"]
+    },
+    "InternshipVacancy": {
+      "title": "InternshipVacancy",
+      "description": "Lowongan magang dari perusahaan mitra",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "company": { "type": "string", "maxLength": 200 },
+        "logo": { "type": "string", "maxLength": 100 },
+        "location": { "type": "string", "maxLength": 200 },
+        "workType": { "type": "string", "maxLength": 50 },
+        "level": { "type": "string", "maxLength": 50 },
+        "stipend": { "type": "string", "maxLength": 100 },
+        "durationMonths": { "type": "number" },
+        "deadline": { "type": "string", "maxLength": 50 },
+        "category": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "slotsAvailable": { "type": "number" },
+        "applicantsCount": { "type": "number" }
+      },
+      "required": ["id", "title", "company", "location", "workType", "level", "stipend"]
+    },
+    "VacancyApplication": {
+      "title": "VacancyApplication",
+      "description": "Pendaftaran lowongan magang oleh siswa",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "vacancyId": { "type": "string", "maxLength": 128 },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 150 },
+        "studentMajor": { "type": "string", "maxLength": 150 },
+        "appliedDate": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["submitted", "under_review", "interview", "accepted", "rejected"] },
+        "resumeSummary": { "type": "string", "maxLength": 1500 },
+        "portfolioUrl": { "type": "string", "maxLength": 500 },
+        "coverLetter": { "type": "string", "maxLength": 2000 },
+        "feedbackNote": { "type": "string", "maxLength": 1000 }
+      },
+      "required": ["id", "vacancyId", "studentId", "studentName", "appliedDate", "status"]
+    },
+    "FinalEvaluation": {
+      "title": "FinalEvaluation",
+      "description": "Evaluasi akhir dan transkrip kelulusan magang",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string", "maxLength": 128 },
+        "mentorName": { "type": "string", "maxLength": 150 },
+        "teacherName": { "type": "string", "maxLength": 150 },
+        "completionDate": { "type": "string", "maxLength": 50 },
+        "generalFeedback": { "type": "string", "maxLength": 2000 },
+        "recommendation": { "type": "string", "maxLength": 100 },
+        "finalGradeLetter": { "type": "string", "maxLength": 10 },
+        "certificateNumber": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["studentId", "mentorName", "teacherName", "certificateNumber"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Profil pengguna yang terdaftar"
+    },
+    "/attendances/{attendanceId}": {
+      "schema": "AttendanceRecord",
+      "description": "Koleksi presensi kerja praktik harian"
+    },
+    "/logbooks/{logbookId}": {
+      "schema": "LogbookEntry",
+      "description": "Koleksi jurnal harian dan tinjauan mentor"
+    },
+    "/tasks/{taskId}": {
+      "schema": "InternshipTask",
+      "description": "Koleksi tugas dan milestone proyek magang"
+    },
+    "/vacancies/{vacancyId}": {
+      "schema": "InternshipVacancy",
+      "description": "Daftar lowongan magang yang tersedia"
+    },
+    "/applications/{applicationId}": {
+      "schema": "VacancyApplication",
+      "description": "Koleksi berkas lamaran peserta magang"
+    },
+    "/evaluations/{studentId}": {
+      "schema": "FinalEvaluation",
+      "description": "Data penilaian akhir dan sertifikat magang"
+    }
+  }
+}

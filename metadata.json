@@ -1,0 +1,8 @@
+{
+  "name": "SiMagang - Aplikasi Magang & PKL Terpadu",
+  "description": "Platform terpadu untuk pendaftaran magang, presensi online, jurnal logbook kegiatan harian, tugas kerja, dan penilaian sertifikasi magang.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
